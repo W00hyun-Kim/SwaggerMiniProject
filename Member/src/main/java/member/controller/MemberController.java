@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/members")
 @Api(tags =  "회원가입 API")
 @RequiredArgsConstructor
 public class MemberController {
