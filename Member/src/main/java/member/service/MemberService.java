@@ -5,6 +5,8 @@ package member.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.security.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 import member.dto.Member;
 import member.repository.MemberRepository;
 
@@ -12,6 +14,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class MemberService {
@@ -125,5 +129,19 @@ public class MemberService {
     	return changedForm;
     }
     
+    //이메일 체크 
+	public void isValidEmail(String email) {
+		boolean err = false;
+		String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(email);
+		if (m.matches()) {
+			err = true;
+		}
+		if(err == false) {
+			throw new NoSuchElementException();
+		}
+	}
+	
     
 }

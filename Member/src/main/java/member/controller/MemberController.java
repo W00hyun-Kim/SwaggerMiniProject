@@ -32,6 +32,7 @@ public class MemberController {
     	
     	member.setPassword(memberService.encrypt(member.getPassword()));
     	member.setPhone(memberService.phoneNumForm(member.getPhone()));
+    	memberService.isValidEmail(member.getEmail());
     	
     	return memberService.save(member);
     }
@@ -96,7 +97,7 @@ public class MemberController {
     @ExceptionHandler(NoSuchElementException.class)
     public Object nullEx(Exception e) {
        
-       return "회원 아이디가 존재하지 않습니다.";
+       return "예외 발생 : 형식에 맞춰 입력을 다시 해주세요.";
     }
 
 }

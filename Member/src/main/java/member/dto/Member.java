@@ -17,35 +17,35 @@ public class Member {
 		
     @Id   
     @Column
-    @ApiModelProperty(example = "가입하고자 하는 아이디")
+    @ApiModelProperty(example = "kamyamy9509")
     private String userId;
     
 	@Column
-    @ApiModelProperty(example = "비밀번호 입력")
+    @ApiModelProperty(example = "asdf123")
     private String password;
 
     @Column
-    @ApiModelProperty(example = "이름 입력(예: 김우현)")    
+    @ApiModelProperty(example = "김우현")    
     private String name;
 
 	@Column
-    @ApiModelProperty(example = "생년월일 입력(예: 19950905)")    	
+    @ApiModelProperty(example = "19950905")    	
     private String birth;
 
     @Column
-    @ApiModelProperty(example = "주소 입력(예: 경기도 성남시)")        
+    @ApiModelProperty(example = "경기도 성남시")        
     private String address;
 
     @Column
-    @ApiModelProperty(example = "성별 입력(예: 여자)")            
+    @ApiModelProperty(example = "여자")            
     private String gender;
 
     @Column
-    @ApiModelProperty(example = "이메일 입력(예: abc@naver.com)")                
+    @ApiModelProperty(example = "abc@naver.com")                
     private String email;
 
     @Column
-    @ApiModelProperty(example = "핸드폰 번호 입력(예: 010-4128-9509)")                
+    @ApiModelProperty(example = "010-4128-9509")                
     private String phone;
    
 }
