@@ -27,7 +27,7 @@ public class MemberController {
     
     //회원 등록
     @PostMapping(value="")
-    @ApiOperation(value = "등록 처리", notes = "신규 회원 등록이 가능합니다.")
+    @ApiOperation(value = "회원 등록", notes = "신규 회원 등록이 가능합니다.")
     public Member save(Member member) throws Exception {
     	
     	member.setPassword(memberService.encrypt(member.getPassword()));
