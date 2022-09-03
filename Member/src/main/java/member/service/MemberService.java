@@ -143,5 +143,12 @@ public class MemberService {
 		}
 	}
 	
+	//성별체크
+	public void isValidGender(String gender) {
+		if(!(gender.equals("여자") || gender.equals("남자"))) {
+			throw new NoSuchElementException();
+		}
+	}
+	
     
 }

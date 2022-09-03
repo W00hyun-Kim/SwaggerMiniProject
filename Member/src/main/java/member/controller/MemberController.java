@@ -33,6 +33,7 @@ public class MemberController {
     	member.setPassword(memberService.encrypt(member.getPassword()));
     	member.setPhone(memberService.phoneNumForm(member.getPhone()));
     	memberService.isValidEmail(member.getEmail());
+    	memberService.isValidGender(member.getGender());
     	
     	return memberService.save(member);
     }
@@ -48,7 +49,7 @@ public class MemberController {
     
     //하나 조회
     @GetMapping(value="/{userId}")
-    @ApiOperation(value = "회원 하나 조회", notes = "아이디를 가지고 회원의 상세 정보를 조회할 수 있습니다.")
+    @ApiOperation(value = "회원 하나 조회", notes = "아이디를 가지고 특정 회원의 상세 정보를 조회할 수 있습니다.")
     @ApiImplicitParams({
     	@ApiImplicitParam(name = "userId", value = "회원 아이디", example = "amy9595")
     })
@@ -93,11 +94,11 @@ public class MemberController {
     	return true;   	   	
     }
     
-    //회원아이디가 존재하지 않을 때 발생하는 예외처리
+    //입력 정보가 형식과 맞지 않을 때 예외 발생시키기
     @ExceptionHandler(NoSuchElementException.class)
     public Object nullEx(Exception e) {
        
-       return "예외 발생 : 형식에 맞춰 입력을 다시 해주세요.";
+       return "※예외 발생 : 형식에 맞춰 입력을 다시 해주세요.";
     }
 
 }
