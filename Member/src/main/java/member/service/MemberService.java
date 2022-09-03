@@ -3,9 +3,12 @@ package member.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import java.security.*;
 import org.springframework.stereotype.Service;
 import member.dto.Member;
 import member.repository.MemberRepository;
+
+import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -56,7 +59,6 @@ public class MemberService {
     	selected.setGender(member.getGender());
     	selected.setEmail(member.getEmail());
     	selected.setPhone(member.getPhone());
-    	selected.setAge(member.getAge());
     	
     	return memberRepository.save(selected);
  	   	
@@ -92,11 +94,36 @@ public class MemberService {
     	if(member.getPhone() != null) {
     		selected.setPhone(member.getPhone());
     	}
-    	if(member.getAge() != null) {
-    		selected.setAge(member.getAge());
-    	}
-    	   	
+   	   	
     	return memberRepository.save(selected);
     }
- 
+    
+    //비밀번호 암호화
+    public String encrypt(String pw) throws Exception {
+    	String str = "";
+    	try {
+    		MessageDigest sh = MessageDigest.getInstance("SHA-256");
+    		sh.update(pw.getBytes());
+    		byte byteData[] = sh.digest();
+    		StringBuffer sb = new StringBuffer();
+    		for (int i = 0; i < byteData.length; i++) {
+				sb.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
+			}
+    		str = sb.toString();
+    	} catch (NoSuchElementException e) {
+    		e.printStackTrace();
+    		str = null;
+    	}
+    	return str;
+    }
+    
+    
+    //핸드폰번호 '-'없애기
+    public String phoneNumForm(String phoneNum) {
+    	String changedForm = phoneNum.replace("-", "");
+    	
+    	return changedForm;
+    }
+    
+    
 }

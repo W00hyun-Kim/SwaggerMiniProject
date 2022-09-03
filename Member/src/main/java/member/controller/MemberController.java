@@ -28,7 +28,10 @@ public class MemberController {
     //회원 등록
     @PostMapping(value="")
     @ApiOperation(value = "등록 처리", notes = "신규 회원 등록이 가능합니다.")
-    public Member save(Member member) {
+    public Member save(Member member) throws Exception {
+    	
+    	member.setPassword(memberService.encrypt(member.getPassword()));
+    	member.setPhone(memberService.phoneNumForm(member.getPhone()));
     	
     	return memberService.save(member);
     }
@@ -75,7 +78,7 @@ public class MemberController {
            
   
     //삭제 처리
-    @DeleteMapping(value="/delete/{userId}")
+    @DeleteMapping(value="/{userId}")
     @ApiOperation(value = "회원 하나 삭제", notes = "아이디를 가지고 회원의 정보를 삭제할 수 있습니다.")
     @ApiImplicitParams({
     	@ApiImplicitParam(name = "userId", value = "회원 아이디", example = "amy9595")
@@ -86,8 +89,7 @@ public class MemberController {
     		return false;
     	}
     	memberService.delete(userId);
-    	return true;   	
-    	
+    	return true;   	   	
     }
     
     //회원아이디가 존재하지 않을 때 발생하는 예외처리
